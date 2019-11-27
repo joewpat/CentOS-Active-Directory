@@ -13,13 +13,6 @@ yum install hyperv-daemons -y
 #update packages now that they are all installed
 yum update -y
 
-#configure hyper-v integration tools to start as a service
-systemctl enable hypervvssd
-systemctl enable hypervkvpd
-
-#enable hyper-v VSS full access through SELinux
-semanage permissive -a hypervvssd_t
-
 #join the domain
 #EDIT THIS TO YOUR DOMAIN!
 realm join --user=administrator >domain.tld>
@@ -35,11 +28,5 @@ systemctl restart sssd.service
 
 echo "%IT ALL=(ALL:ALL) ALL" | tee -a /etc/sudoers.d/sudoers > /dev/null
 
-
-
-#Allow SSSD apps through SElinux
+#Allow SSSD SElinux
 setsebool -P allow_ypbind=1
-
-
-
-echo "Success!"
