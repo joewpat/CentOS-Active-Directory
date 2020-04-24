@@ -24,9 +24,9 @@ sed -i -e 's|fallback_homedir = /home/%u@%d|fallback_homedir = /home/%u|' /etc/s
 #restart service so changes take effect
 systemctl restart sssd.service
 
-#allow IT group to have sudo access. replace with whatever AD group you want, or comment the thang out
-
-echo "%IT ALL=(ALL:ALL) ALL" | tee -a /etc/sudoers.d/sudoers > /dev/null
+#allow IT group to have sudo access. replace with whatever AD group you want
+#be sure to uncomment the line if you want it to work :)
+#echo "%IT ALL=(ALL:ALL) ALL" | tee -a /etc/sudoers.d/sudoers > /dev/null
 
 #Allow SSSD SElinux
 setsebool -P allow_ypbind=1
